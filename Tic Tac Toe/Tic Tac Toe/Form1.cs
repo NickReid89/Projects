@@ -67,18 +67,22 @@ namespace Tic_Tac_Toe
             if (progress[0, 0] == 1 && progress[1, 1] == 1 && progress[2, 2] == 1)
             {
                 MessageBox.Show("Computer Wins!");
+                BoardFreeze();
             }
             else if (progress[0, 2] == 1 && progress[1, 1] == 1 && progress[2, 0] == 1)
             {
                 MessageBox.Show("Computer Wins!");
+                BoardFreeze();
             }
             else if(progress[0, 0] == 2 && progress[1, 1] == 2 && progress[2, 2] == 2)
             {
                 MessageBox.Show("Player Wins!");
+                BoardFreeze();
             }
             else if (progress[0, 2] == 2 && progress[1, 1] == 2 && progress[2, 0] == 2)
             {
                 MessageBox.Show("Player Wins!");
+                BoardFreeze();
             }
 
             //Check for lines
@@ -98,13 +102,15 @@ namespace Tic_Tac_Toe
                     if (compWin == 3)
                     {
                         MessageBox.Show("Computer Wins!");
-                     
+                        BoardFreeze();
+                        compWin = 0;
 
                     }
                     else if (playerWin == 3)
                     {
                         MessageBox.Show("You win!");
-                     
+                        BoardFreeze();
+                        playerWin = 0;
                     }
                 }
                 
@@ -115,37 +121,39 @@ namespace Tic_Tac_Toe
         private void Clicked(object sender, EventArgs args)
         {
             Button clicked = (Button)sender;
-            clicked.BackColor = Color.AliceBlue;
-            CheckedIfClicked();
-            checkSquares();
-            Boolean CompTurn = false;
             Random H = new Random();
             Random V = new Random();
             int Hor = H.Next(3);
-            int  Ver = V.Next(3);
-            
+            int Ver = V.Next(3);
 
+            //MessageBox.Show(Hor.ToString());
+            //rows[2, 2].BackColor = 
 
-
-
-            while (rows[Hor, Ver].BackColor != Color.AliceBlue && rows[Hor, Ver].BackColor != Color.Beige)
+            while (rows[Hor, Ver].BackColor == SystemColors.Control)
             {
-                H.Next(2);
-                V.Next(2);
-                rows[Hor, Ver].BackColor = Color.Beige;
-                progress[Hor, Ver] = 1;
-                CompTurn = true;
-            }
-            //if (rows[Hor, Ver].BackColor != Color.AliceBlue && rows[Hor, Ver].BackColor != Color.Beige)
-            //{
-            //    rows[Hor, Ver].BackColor = Color.Beige;
-            //    progress[Hor, Ver] = 2;
-            //    CompTurn = true;
-            //}
- 
- 
+                if (rows[Hor, Ver].BackColor == SystemColors.Control)
+                {
+                    rows[Hor, Ver].BackColor = Color.Beige;
+                    progress[Hor, Ver] = 1;
+                    rows[Hor, Ver].Enabled = false;
+                    break;
+                }
+                else
+                {
+                    H.Next(3);
+                    V.Next(3);
+                }
 
-            
+            }
+
+            //if (clicked.BackColor != Color.AliceBlue && clicked.BackColor != Color.Beige)
+            //{
+            //    clicked.BackColor = Color.AliceBlue;    
+            //    CheckedIfClicked();
+            //    checkSquares();
+            //}
+
+ 
        }
         private void CheckedIfClicked()
         {
@@ -154,8 +162,17 @@ namespace Tic_Tac_Toe
                 for (int j = 0; j < 3; j++)
                 {
                     if(rows[i,j].BackColor == Color.AliceBlue){
-                        progress[i,j] = 2;
+                        progress[i, j] = 2;
                     }
+                }
+            }
+        }
+        private void BoardFreeze()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0;j < 3; j++){
+                    rows[i,j].Enabled = false;
                 }
             }
         }
