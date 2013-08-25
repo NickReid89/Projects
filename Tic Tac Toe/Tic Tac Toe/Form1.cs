@@ -51,7 +51,7 @@ namespace Tic_Tac_Toe
                     }
 
                 }
-               
+                
             }
 
         }
@@ -121,37 +121,15 @@ namespace Tic_Tac_Toe
         private void Clicked(object sender, EventArgs args)
         {
             Button clicked = (Button)sender;
-            Random H = new Random();
-            Random V = new Random();
-            int Hor = H.Next(3);
-            int Ver = V.Next(3);
 
-            //MessageBox.Show(Hor.ToString());
-            //rows[2, 2].BackColor = 
 
-            while (rows[Hor, Ver].BackColor == SystemColors.Control)
+            if (clicked.BackColor != Color.AliceBlue && clicked.BackColor != Color.Beige)
             {
-                if (rows[Hor, Ver].BackColor == SystemColors.Control)
-                {
-                    rows[Hor, Ver].BackColor = Color.Beige;
-                    progress[Hor, Ver] = 1;
-                    rows[Hor, Ver].Enabled = false;
-                    break;
-                }
-                else
-                {
-                    H.Next(3);
-                    V.Next(3);
-                }
-
+                clicked.BackColor = Color.AliceBlue;
+                CheckedIfClicked();
+                checkSquares();
             }
-
-            //if (clicked.BackColor != Color.AliceBlue && clicked.BackColor != Color.Beige)
-            //{
-            //    clicked.BackColor = Color.AliceBlue;    
-            //    CheckedIfClicked();
-            //    checkSquares();
-            //}
+            ComputerTurn();
 
  
        }
@@ -176,6 +154,36 @@ namespace Tic_Tac_Toe
                 }
             }
         }
+        private void ComputerTurn()
+        {
+            Random H = new Random();
+
+            int Hor = H.Next(3);
+
+            int Ver = H.Next(3);
+
+
+            while (rows[Hor, Ver].BackColor == SystemColors.Control)
+            {
+
+                if (rows[Hor, Ver].BackColor == SystemColors.Control)
+                {
+                    rows[Hor, Ver].BackColor = Color.Beige;
+                    progress[Hor, Ver] = 1;
+                    rows[Hor, Ver].Enabled = false;
+                    
+                }
+                else
+                {
+                    H.Next(3);
+                }
+
+            }
+
+
+
+        }
+
 
     }
 }
