@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnRockPaperSciccors = new System.Windows.Forms.Button();
             this.btnRock = new System.Windows.Forms.Button();
             this.btnPaper = new System.Windows.Forms.Button();
             this.btnSciccors = new System.Windows.Forms.Button();
             this.lblScore = new System.Windows.Forms.Label();
+            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnRockPaperSciccors
@@ -83,11 +86,22 @@
             this.lblScore.TabIndex = 4;
             this.lblScore.Text = "Score: ";
             // 
+            // axWindowsMediaPlayer1
+            // 
+            this.axWindowsMediaPlayer1.Enabled = true;
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(228, 235);
+            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
+            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(109, 46);
+            this.axWindowsMediaPlayer1.TabIndex = 5;
+            this.axWindowsMediaPlayer1.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(349, 290);
+            this.Controls.Add(this.axWindowsMediaPlayer1);
             this.Controls.Add(this.lblScore);
             this.Controls.Add(this.btnSciccors);
             this.Controls.Add(this.btnPaper);
@@ -95,6 +109,7 @@
             this.Controls.Add(this.btnRockPaperSciccors);
             this.Name = "Form1";
             this.Text = "Rock,Paper,Scissors";
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -107,6 +122,7 @@
         private System.Windows.Forms.Button btnPaper;
         private System.Windows.Forms.Button btnSciccors;
         private System.Windows.Forms.Label lblScore;
+        private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
     }
 }
 

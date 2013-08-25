@@ -16,18 +16,19 @@ namespace CoinFlip
         public Form1()
         {
             InitializeComponent();
-            System.Media.SoundPlayer sp = new System.Media.SoundPlayer(@"C:\Users\McAwesome\Documents\CoffeeCup Software\Sounds\cash.wav");
-            sp.Play();
+            
         }
 
         private void CompDecision()
         {
+            // Let's the computer make a decision
             Random R = new Random();
+            // Store decision
             int decision = R.Next(3);
-            
+            // Turns decision from number to word.
             State(decision);
 
-
+            // decisions.
             if (userDecision == decision)
             {
                 lblScore.Text = "Tie!";
@@ -69,24 +70,25 @@ namespace CoinFlip
                 Score();
             }
         }
-
+        // Player Rock
         private void btnRock_Click(object sender, EventArgs e)
         {
             userDecision = 0;
             CompDecision();
         }
-
+        //Player Paper
         private void btnPaper_Click(object sender, EventArgs e)
         {
             userDecision = 1;
             CompDecision();
         }
-
+        //player Scissors
         private void btnSciccors_Click(object sender, EventArgs e)
         {
             userDecision = 2;
             CompDecision();
         }
+        // Turns computer number into word.
         private void State(int state)
         {
             if (state == 0)
@@ -102,6 +104,7 @@ namespace CoinFlip
                 btnRockPaperSciccors.Text = "Scissors";
             }
         }
+        // Modifies Score.
         private void Score()
         {
             lblScore.Text = "Score: " + score.ToString();
