@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
+
 
 namespace CoinFlip
 {
@@ -13,6 +15,14 @@ namespace CoinFlip
     {
         int userDecision;
         int score = 0;
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd,
+                         int Msg, int wParam, int lParam);
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
         public Form1()
         {
             InitializeComponent();
@@ -93,14 +103,20 @@ namespace CoinFlip
         {
             if (state == 0)
             {
+                btnRockPaperSciccors.BackgroundImage = Image.FromFile("C:\\Users\\McAwesome\\Documents\\GitHub\\Projects\\Rock,Paper,Scissors\\Rock,Paper,Scissors\\Properties\\Rock.jpg");
+                btnRockPaperSciccors.BackgroundImageLayout = ImageLayout.Stretch;
                 btnRockPaperSciccors.Text = "Rock";
             }
             else if (state == 1)
             {
+                btnRockPaperSciccors.BackgroundImage = Image.FromFile("C:\\Users\\McAwesome\\Documents\\GitHub\\Projects\\Rock,Paper,Scissors\\Rock,Paper,Scissors\\Properties\\Paper1.jpg");
+                btnRockPaperSciccors.BackgroundImageLayout = ImageLayout.Stretch;
                 btnRockPaperSciccors.Text = "Paper";
             }
             else
             {
+                btnRockPaperSciccors.BackgroundImage = Image.FromFile("C:\\Users\\McAwesome\\Documents\\GitHub\\Projects\\Rock,Paper,Scissors\\Rock,Paper,Scissors\\Properties\\Scissors.jpg");
+                btnRockPaperSciccors.BackgroundImageLayout = ImageLayout.Stretch;
                 btnRockPaperSciccors.Text = "Scissors";
             }
         }
@@ -109,5 +125,18 @@ namespace CoinFlip
         {
             lblScore.Text = "Score: " + score.ToString();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void rectForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);  
+        }
+
+
     }
 }
